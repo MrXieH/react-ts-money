@@ -3,6 +3,10 @@ import styled from "styled-components";
 import {Switch, Route, Redirect, HashRouter as Router, Link} from 'react-router-dom';
 import NoMatch from "./views/NoMatch";
 
+import x from './icons/jizhang.svg';
+
+console.log(x)
+
 const AppWrapper = styled.div`
   color: #333;
 `

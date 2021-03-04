@@ -23,10 +23,15 @@ const Wrapper = styled.section`
   }
 `;
 
-const TagsSection: React.FC = () => {
-  const [tags, setTags] = useState<string[]>(['衣', '食物', '住', '行'])
+type Props = {
+  value: string;
+  change: (e: Partial<RecordItem>) => void;
+}
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+const TagsSection: React.FC<Props> = (props) => {
+  const [tags, setTags] = useState<string[]>(['衣', '食物', '住', '行'])
+  const selectedTag = props.value
+
 
   const addTag = (): void => {
     const tagName = window.prompt('请输入新标签的名称')
@@ -36,20 +41,15 @@ const TagsSection: React.FC = () => {
         return
       }
       setTags([...tags, tagName])
-
     }
   }
 
   const toggleTags = (tag: string): void => {
-    if (selectedTags.indexOf(tag) >= 0) {
-      setSelectedTags(selectedTags.filter(t => t !== tag))
-    } else {
-      setSelectedTags([...selectedTags, tag])
-    }
+    props.change({ tag: selectedTag === tag ? '' : tag })
   }
 
   const getActiveClass = (tag: string): string => {
-    return selectedTags.indexOf(tag) >= 0 ? 'selected' : ''
+    return selectedTag === tag ? 'selected' : ''
   }
 
   return (

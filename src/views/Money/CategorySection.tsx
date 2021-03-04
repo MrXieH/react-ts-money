@@ -35,8 +35,12 @@ const categoryList: CategoryList = [
   { name: '支出', value: '-' }
 ]
 
-const CategorySection = () => {
-  const [selected, setSelected] = useState<Category>('+')
+type Props = {
+  value: '+' | '-';
+  change: (e: Partial<RecordItem>) => void;
+}
+
+const CategorySection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <ul>
@@ -45,8 +49,8 @@ const CategorySection = () => {
             return (
               <li
                 key={item.value}
-                className={ item.value === selected ? 'selected' : '' }
-                onClick={() => setSelected(item.value)}>
+                className={ item.value === props.value ? 'selected' : '' }
+                onClick={() => props.change({ category: item.value })}>
                 { item.name }
               </li>
             )

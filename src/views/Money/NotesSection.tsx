@@ -19,11 +19,16 @@ const Wrapper = styled.section`
   }
 `;
 
-const NotesSection: React.FC = () => {
-  const [note, setNote] = useState<string>('')
+type Props = {
+  value: string;
+  change: (e: Partial<RecordItem>) => void;
+}
+
+const NotesSection: React.FC<Props> = (props) => {
+  const [note] = useState<string>(props.value)
   const changeNote = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement
-    setNote(target.value)
+    props.change({ notes: target.value })
   }
   return (
     <Wrapper>
@@ -32,7 +37,7 @@ const NotesSection: React.FC = () => {
         <input
           type="text"
           placeholder="在这里添加备注"
-          value={note}
+          defaultValue={note}
           onChange={changeNote}
         />
       </label>

@@ -75,14 +75,20 @@ const numberList: NumberList = [
   {value: '.', className: 'dot'},
 ]
 
-const NumberPadSection: React.FC = () => {
-  const [output, _setOutput] = useState<string>('0')
+type Props = {
+  value: string;
+  change: (e: Partial<RecordItem>) => void;
+  ok: () => void;
+}
+
+const NumberPadSection: React.FC<Props> = (props) => {
+  let output = props.value
   const MaxLength = 16
   const setOutput = (value: string) => {
     if (value.length >= MaxLength) {
       return
     }
-    _setOutput(value)
+    props.change({ value })
   }
 
   const handlerClick = (data: NumberItem) => {
@@ -95,7 +101,9 @@ const NumberPadSection: React.FC = () => {
       if (action === 'clean') {
         setOutput('0')
       }
-      if (action === 'ok') {}
+      if (action === 'ok') {
+        props.ok()
+      }
       return
     }
     if (value === '.' && isDot) {

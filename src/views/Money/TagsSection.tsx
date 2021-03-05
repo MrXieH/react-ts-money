@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from "react";
+import {useTags} from "../../hooks/useTags";
+import {createId} from "../../lib/createId";
 
 const Wrapper = styled.section`
   background: #FFFFFF; padding: 12px 16px;
@@ -29,23 +31,24 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<string[]>(['衣', '食物', '住', '行'])
+  // const [tags, setTags] = useState<string[]>(['衣', '食物', '住', '行'])
+  const { tags, setTags, findTag } = useTags()
   const selectedTag = props.value
 
 
   const addTag = (): void => {
     const tagName = window.prompt('请输入新标签的名称')
     if (tagName !== null) {
-      if (tags.indexOf(tagName) >= 0) {
+      if (tags.filter(item => item.name === tagName).length > 0) {
         alert('标签名已存在')
         return
       }
-      setTags([...tags, tagName])
+      setTags([...tags, { id: createId(), name: tagName }])
     }
   }
 
-  const toggleTags = (tag: string): void => {
-    props.change({ tag: selectedTag === tag ? '' : tag })
+  const toggleTags = (tagId: string): void => {
+    props.change({ tagId: selectedTag === tagId ? '' : tagId })
   }
 
   const getActiveClass = (tag: string): string => {
@@ -57,7 +60,7 @@ const TagsSection: React.FC<Props> = (props) => {
       <ol>
         {
           tags.map(tag => {
-            return <li key={tag} className={getActiveClass(tag)} onClick={() => toggleTags(tag)}>{tag}</li>
+            return <li key={tag.id} className={getActiveClass(tag.id)} onClick={() => toggleTags(tag.id)}>{tag.name}</li>
           })
         }
       </ol>

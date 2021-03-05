@@ -1,5 +1,10 @@
+type Tag = {
+  id: string;
+  name: string;
+}
+
 type RecordItem = {
-    tag: string;
+    tagId: string;
     notes: string;
     category: '+' | '-';
     value: string

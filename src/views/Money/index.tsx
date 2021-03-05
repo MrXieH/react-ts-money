@@ -11,9 +11,9 @@ const MyLayout = styled(Layout)`
     flex-direction: column;
   `
 
-function Money() {
+const Money: React.FC = () => {
   const [record, setRecord] = useState<RecordItem>({
-    tag: '',
+    tagId: '',
     notes: '',
     category: '+',
     value: '0'
@@ -27,7 +27,7 @@ function Money() {
   }
   return (
     <MyLayout>
-      <TagsSection value={record.tag} change={change}/>
+      <TagsSection value={record.tagId} change={change}/>
       <NotesSection value={record.notes} change={change}/>
       <CategorySection value={record.category} change={change}/>
       <NumberPadSection value={record.value} change={change} ok={save}/>

@@ -20,7 +20,7 @@ const useTags = () => {
 
   useUpdate(() => {
     localStorage.setItem('tags', JSON.stringify(tags))
-  }, [tags])
+  }, tags)
 
   const searchTags = (name: string) => tags.filter(item => item.name === name)
 

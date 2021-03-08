@@ -35,7 +35,7 @@ function Index() {
   const hash: { [key: string]: RecordList } = {}
   const selectedRecords = getRecords().filter(r => r.category === category)
 
-  selectedRecords.map(item => {
+  selectedRecords.forEach(item => {
     const key = dayjs(item.createAt).format('YYYY年MM月DD日')
     if (!(key in hash)) {
       hash[key] = []

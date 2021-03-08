@@ -17,7 +17,7 @@ const useRecord = () => {
 
   useUpdate(() => {
     localStorage.setItem('records', JSON.stringify(records))
-  }, [records])
+  }, records)
 
   const addRecord = (record: RecordItem) => {
     const data: RecordItemParams = {

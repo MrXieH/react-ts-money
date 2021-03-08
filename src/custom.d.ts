@@ -1,3 +1,5 @@
+type Category = '+' | '-'
+
 type Tag = {
   id: string;
   name: string;
@@ -7,8 +9,8 @@ type RecordItemParams = {
   id: string;
   tagId: string;
   notes: string;
-  category: '+' | '-';
-  value: string;
+  category: Category;
+  amount: string;
   createAt: string;
 }
 

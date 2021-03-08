@@ -1,12 +1,18 @@
 import {useEffect, useState} from "react";
 import {createId} from "../lib/createId";
 import {useUpdate} from "./useUpdate";
+import { useTags } from "./useTags";
+
+export type RecordList = (RecordItemParams & {
+  tag: Tag
+})[]
 
 const useRecord = () => {
   const [records, setRecords] = useState<RecordItemParams[]>([])
+  const { findTag } = useTags()
 
   useEffect(() => {
-    setRecords(JSON.parse(localStorage.getItem('record') || '[]'))
+    setRecords(JSON.parse(localStorage.getItem('records') || '[]'))
   }, [])
 
   useUpdate(() => {
@@ -22,7 +28,16 @@ const useRecord = () => {
     setRecords([...records, data])
   }
 
-  return {records, addRecord}
+  const getRecords = (): RecordList => {
+    return records.map(item => {
+      return {
+        ...item,
+        tag: findTag(item.tagId)
+      }
+    })
+  }
+
+  return {records, addRecord, getRecords}
 }
 
 export { useRecord }

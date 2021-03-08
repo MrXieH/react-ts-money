@@ -88,7 +88,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (value.length >= MaxLength) {
       return
     }
-    props.change({ value })
+    props.change({ amount: value })
   }
 
   const handlerClick = (data: NumberItem) => {

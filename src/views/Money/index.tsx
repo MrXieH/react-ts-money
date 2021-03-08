@@ -12,11 +12,15 @@ const MyLayout = styled(Layout)`
     flex-direction: column;
   `
 
+const CategoryWrapper = styled.div`
+  background: #c4c4c4;
+`
+
 const defaultFormData: RecordItem = {
   tagId: '',
   notes: '',
   category: '+',
-  value: '0'
+  amount: '0'
 }
 
 const Money: React.FC = () => {
@@ -39,8 +43,10 @@ const Money: React.FC = () => {
     <MyLayout>
       <TagsSection value={record.tagId} change={change}/>
       <NotesSection value={record.notes} change={change}/>
-      <CategorySection value={record.category} change={change}/>
-      <NumberPadSection value={record.value} change={change} ok={save}/>
+      <CategoryWrapper>
+        <CategorySection value={record.category} change={change}/>
+      </CategoryWrapper>
+      <NumberPadSection value={record.amount} change={change} ok={save}/>
     </MyLayout>
   );
 }

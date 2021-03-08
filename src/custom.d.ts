@@ -3,9 +3,13 @@ type Tag = {
   name: string;
 }
 
-type RecordItem = {
-    tagId: string;
-    notes: string;
-    category: '+' | '-';
-    value: string
+type RecordItemParams = {
+  id: string;
+  tagId: string;
+  notes: string;
+  category: '+' | '-';
+  value: string;
+  createAt: string;
 }
+
+type RecordItem = Omit<RecordItemParams, 'createAt' | 'id'>
